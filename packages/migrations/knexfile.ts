@@ -1,7 +1,5 @@
 import { type Knex } from 'knex';
 
-import tsNode from 'ts-node';
-
 const config: { [key: string]: Knex.Config } = {
     development: {
         client: 'postgresql',

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+    app:
+        build: .
+        ports:
+            - '8080:8080'
+        depends_on:
+            - db
+        environment:
+            POSTGRES_USER: kbulatovic
+            POSTGRES_PASSWORD: billups1234
+            POSTGRES_DB: billups
+
+    db:
+        image: postgres:13
+        environment:
+            POSTGRES_USER: kbulatovic
+            POSTGRES_PASSWORD: billups1234
+            POSTGRES_DB: billups
+        ports:
+            - '5432:5432'
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+
+volumes:
+    pgdata:

@@ -1,9 +1,0 @@
-{
-    "verbose": true,
-    "ignore": ["client/*"],
-    "execMap": {
-        "ts": "tsx server/server.ts --tsconfig tsconfig.server.json"
-    },
-    "ext": "ts",
-    "watch": ["server"]
-}

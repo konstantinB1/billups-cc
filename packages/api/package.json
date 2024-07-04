@@ -1,6 +1,9 @@
 {
     "name": "@billups-cc/server",
     "version": "1.0.0",
+    "scripts": {
+        "dev": "npx tsx src/server.ts --tsconfig tsconfig.json"
+    },
     "devDependencies": {
         "@types/koa": "^2.15.0",
         "@types/koa__router": "^12.0.4"

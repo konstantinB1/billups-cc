@@ -2,7 +2,7 @@
     "name": "billups",
     "version": "1.0.0",
     "scripts": {
-        "server:dev": "nodemon tsx server/server.ts --tsconfig tsconfig.server.json",
+        "server:dev": "npm run dev -w packages/server",
         "migrations:init": "npm run init -w packages/migrations",
         "migrations:create": "npm run create -w packages/migrations",
         "migrations:migrate": "npm run migrate -w packages/migrations",
@@ -18,11 +18,9 @@
         "@types/koa__router": "^12.0.4",
         "@types/node": "^20.14.9",
         "dotenv": "^16.4.5",
-        "nodemon": "^3.1.4",
         "prettier": "^3.3.2",
         "tsx": "^4.16.2",
-        "typescript": "^5.5.3",
-        "vite": "^5.3.3"
+        "typescript": "^5.5.3"
     },
     "dependencies": {
         "@koa/router": "^12.0.1",

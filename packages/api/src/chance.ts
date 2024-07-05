@@ -1,4 +1,5 @@
-import { ChoicesLiteral, getChoiceByLiteral } from './logic';
+import { ChoicesLiteral } from '@billups-cc/common';
+import { getChoiceByLiteral } from './logic';
 
 export default function chance(n: number) {
     if (n > 0 && n < 20) {

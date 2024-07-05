@@ -1,16 +1,17 @@
 import Koa from 'koa';
 import Router from '@koa/router';
-import { getAllChoices, getRandomChoice } from './logic';
+// import { getAllChoices, getRandomChoice } from './logic';
 
 const app = new Koa();
 const router = new Router();
 
-router.get('/choice', (ctx) => {
-    ctx.body = getRandomChoice();
+router.get('/choice', async (ctx) => {
+    // ctx.body = await getRandomChoice();
+    ctx.body = 'Hello World';
 });
 
 router.get('/choices', (ctx) => {
-    ctx.body = getAllChoices();
+    // ctx.body = getAllChoices();
 });
 
 router.use(async (ctx, next) => {
@@ -22,6 +23,6 @@ router.post('/play', (ctx) => {});
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000, () => {
-    console.log('Server is running at http://localhost:3000');
+app.listen(8000, () => {
+    console.log('Server is running at http://localhost:8000');
 });

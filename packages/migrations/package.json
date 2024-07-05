@@ -2,9 +2,9 @@
     "name": "@billups-cc/migrations",
     "description": "A package for managing database migrations",
     "scripts": {
-        "create": "tsx ./node_modules/.bin/knex migrate:make --knexfile knexfile.ts -x ts",
-        "migrate": "tsx ./node_modules/.bin/knex migrate:latest --knexfile knexfile.ts",
-        "rollback": "tsx ./node_modules/.bin/knex migrate:rollback --knexfile knexfile.ts -x ts",
+        "create": "tsx node_modules/.bin/knex migrate:make --knexfile knexfile.ts -x ts",
+        "migrate": "tsx node_modules/.bin/knex migrate:latest --knexfile knexfile.ts",
+        "rollback": "tsx node_modules/.bin/knex migrate:rollback --knexfile knexfile.ts -x ts",
         "init": "knex init -x ts"
     },
     "devDependencies": {

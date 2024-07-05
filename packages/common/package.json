@@ -1,0 +1,10 @@
+{
+    "name": "@billups-cc/common",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "src/index.ts",
+    "esnext": "src/index.ts",
+    "files": [
+        "src/*"
+    ]
+}

@@ -13,8 +13,6 @@ services:
         build:
             context: packages/migrations
             dockerfile: Dockerfile
-        ports:
-            - '8080:8080'
         depends_on:
             - db
         environment:
@@ -27,13 +25,23 @@ services:
             context: packages/api
             dockerfile: Dockerfile
         ports:
-            - '3000:3000'
+            - '8000:8000'
         depends_on:
             - db
+            - migrations
         environment:
             POSTGRES_HOST: db
             POSTGRES_USER: kbulatovic
             POSTGRES_PASSWORD: billups1234
             POSTGRES_DB: billups
+    client:
+        build:
+            context: packages/client
+            dockerfile: Dockerfile
+        ports:
+            - '3000:3000'
+        depends_on:
+            - db
+            - migrations
 volumes:
     pgdata:

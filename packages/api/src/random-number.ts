@@ -2,7 +2,7 @@ export const getRandomNumber = async (): Promise<{
     random_number: number;
 }> => {
     try {
-        const base = process.env.CODE_CHALLENGE_URL;
+        const base = 'https://codechallenge.boohma.com';
         const res = await fetch(base + '/random');
         return await res.json();
     } catch (e) {

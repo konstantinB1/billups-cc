@@ -2,11 +2,13 @@
     "name": "billups",
     "version": "1.0.0",
     "scripts": {
-        "server:dev": "npm run dev -w packages/server",
+        "client:dev": "npm run dev -w packages/client",
+        "api:dev": "npm run dev -w packages/api",
         "migrations:init": "npm run init -w packages/migrations",
         "migrations:create": "npm run create -w packages/migrations",
         "migrations:migrate": "npm run migrate -w packages/migrations",
-        "migrations:rollback": "npm run rollback -w packages/migrations"
+        "migrations:rollback": "npm run rollback -w packages/migrations",
+        "dev": "npm run migrations:migrate && npm run api:dev && npm run client:dev"
     },
     "author": "Konstantin Bulatovic",
     "license": "ISC",
@@ -14,18 +16,7 @@
         "packages/*"
     ],
     "devDependencies": {
-        "@types/koa": "^2.15.0",
-        "@types/koa__router": "^12.0.4",
-        "@types/node": "^20.14.9",
-        "dotenv": "^16.4.5",
         "prettier": "^3.3.2",
-        "tsx": "^4.16.2",
         "typescript": "^5.5.3"
-    },
-    "dependencies": {
-        "@koa/router": "^12.0.1",
-        "knex": "^3.1.0",
-        "koa": "^2.15.3",
-        "pg": "^8.12.0"
     }
 }

@@ -7,8 +7,5 @@ RUN npm install
 
 COPY . .
 
-# Server
-EXPOSE 8000
-
-
+EXPOSE 3000
 CMD ["npm", "run", "dev"]

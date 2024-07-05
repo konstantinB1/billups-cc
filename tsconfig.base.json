@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "paths": {
+            "@billups/client": ["packages/client/src"],
+            "@billups/server": ["packages/server/src"],
+            "@billups/common": ["packages/common/src"]
+        }
+    }
+}

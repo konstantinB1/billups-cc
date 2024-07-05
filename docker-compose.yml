@@ -29,6 +29,13 @@ services:
         depends_on:
             - db
             - migrations
+        develop:
+          watch:
+            - action: sync+restart
+              path: packages/api
+              target: /app/packages/api
+              ignore:
+                - node_modules
         environment:
             POSTGRES_HOST: db
             POSTGRES_USER: kbulatovic
@@ -40,6 +47,13 @@ services:
             dockerfile: Dockerfile
         ports:
             - '3000:3000'
+        develop:
+          watch:
+            - action: sync+restart
+              path: packages/client
+              target: /app
+              ignore:
+                - node_modules
         depends_on:
             - db
             - migrations

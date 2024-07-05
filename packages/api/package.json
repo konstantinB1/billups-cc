@@ -2,15 +2,15 @@
     "name": "@billups-cc/server",
     "version": "1.0.0",
     "scripts": {
-        "dev": "npx tsx src/server.ts --tsconfig tsconfig.json"
+        "dev": "nodemon --watch src --ext \"ts,json\" --exec \"npx tsx src/server.ts --tsconfig packages/api/tsconfig.json\""
     },
     "devDependencies": {
         "@types/koa": "^2.15.0",
         "@types/koa__router": "^12.0.4",
+        "nodemon": "^3.1.4",
         "tsx": "^4.16.2"
     },
     "dependencies": {
-        "@billups-cc/common": "file:../common",
         "@koa/router": "^12.0.1",
         "koa": "^2.15.3"
     }

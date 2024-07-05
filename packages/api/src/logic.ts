@@ -1,6 +1,6 @@
 import { getRandomNumber } from './random-number';
 import chance from './chance';
-import { Choice, ChoicesLiteral, Result } from '@billups-cc/common';
+import { Choice, ChoicesLiteral, Result } from '../../common';
 
 const choices = Object.keys(ChoicesLiteral).reduce<Choice[]>((acc, key, i) => {
     const choice: Choice = {

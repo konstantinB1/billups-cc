@@ -1,4 +1,4 @@
-import { ChoicesLiteral } from '@billups-cc/common';
+import { ChoicesLiteral } from '../../common';
 import { getChoiceByLiteral } from './logic';
 
 export default function chance(n: number) {

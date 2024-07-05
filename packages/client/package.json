@@ -13,7 +13,6 @@
         "vite": "^5.3.3"
     },
     "dependencies": {
-        "@billups-cc/common": "file:../common",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     }

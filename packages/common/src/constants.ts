@@ -7,7 +7,14 @@ export enum ChoicesLiteral {
 }
 
 export enum Result {
-    Win = 'Win',
-    Lose = 'Lose',
-    Draw = 'Draw',
+    Win = 'win',
+    Lose = 'win',
+    Draw = 'draw',
 }
+
+export enum PlayerType {
+    Player = 'player',
+    Computer = 'computer',
+}
+
+export const randomNumberEndpoint = 'https://codechallenge.boohma.com';

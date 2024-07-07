@@ -1,10 +1,5 @@
 import { type Knex } from 'knex';
 
-console.log('process.env.POSTGRES_DB', process.env.POSTGRES_DB);
-console.log('process.env.POSTGRES_USER', process.env.POSTGRES_USER);
-console.log('process.env.POSTGRES_PASSWORD', process.env.POSTGRES_PASSWORD);
-console.log('process.env.POSTGRES_HOST', process.env.POSTGRES_HOST);
-
 const config: { [key: string]: Knex.Config } = {
     development: {
         client: 'pg',

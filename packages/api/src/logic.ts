@@ -14,6 +14,9 @@ const choices = Object.keys(ChoicesLiteral).reduce<Choice[]>((acc, key, i) => {
 export const getChoiceByLiteral = (literal: ChoicesLiteral): Choice =>
     choices.find((choice) => choice.name === literal)!;
 
+export const getChoiceById = (id: number): Choice | undefined =>
+    choices.find((choice) => choice.id === id)!;
+
 export const getRandomChoice = async (): Promise<Choice> => {
     const { random_number } = await getRandomNumber();
     return chance(random_number);
@@ -24,6 +27,7 @@ export const outcome = (
     computerChoice: ChoicesLiteral,
 ): Result => {
     let userResult: Result;
+
     if (
         userChoice === ChoicesLiteral.Rock &&
         computerChoice === ChoicesLiteral.Scissors

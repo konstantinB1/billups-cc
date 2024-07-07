@@ -2,6 +2,10 @@ import { ChoicesLiteral } from '../../common';
 import { getChoiceByLiteral } from './logic';
 
 export default function chance(n: number) {
+    if (isNaN(n)) {
+        throw new Error('n is not a number');
+    }
+
     if (n > 0 && n < 20) {
         return getChoiceByLiteral(ChoicesLiteral.Rock);
     }

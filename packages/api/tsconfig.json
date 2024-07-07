@@ -1,5 +1,6 @@
 {
-    "include": ["src/**/*"],
+    "extends": "../../tsconfig.json",
+    "include": ["src/**/*", "test"],
     "compilerOptions": {
         "target": "esnext",
         "module": "ESNext",
@@ -11,6 +12,7 @@
         "noEmit": true,
         "isolatedModules": true,
         "resolveJsonModule": true,
-        "baseUrl": "."
+        "baseUrl": ".",
+        "types": ["node", "jest"]
     }
 }

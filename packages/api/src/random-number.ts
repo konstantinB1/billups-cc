@@ -1,8 +1,10 @@
+import { randomNumberEndpoint } from '../../common/src/constants';
+
 export const getRandomNumber = async (): Promise<{
     random_number: number;
 }> => {
     try {
-        const base = 'https://codechallenge.boohma.com';
+        const base = randomNumberEndpoint;
         const res = await fetch(base + '/random');
         return await res.json();
     } catch (e) {

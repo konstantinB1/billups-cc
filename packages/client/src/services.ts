@@ -1,23 +1,40 @@
-import type { Choice } from '@billups-cc/common';
+import { type Choice, stdResponse, StdResponseType } from '../../common';
+import { useEffect, useState } from 'react';
 
-export const getChoices = async () => {
-    const response = await fetch('/api/choices');
-    return (await response.json()) as Choice[];
-};
+const createFetch =
+    (baseUrl: string) =>
+    async <T>(
+        url: string,
+        method: string = 'GET',
+        data?: T,
+    ): Promise<StdResponseType<T | null>> => {
+        try {
+            const opts: RequestInit = {
+                method,
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
 
-export const getChoice = async () => {
-    const response = await fetch('/api/choice');
-    return (await response.json()) as Choice;
-};
+            if (method === 'POST' || method === 'PUT') {
+                opts.body = JSON.stringify(data);
+            }
 
-export const play = async (userChoice: string) => {
-    const response = await fetch('/api/play', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userChoice }),
-    });
+            const finalUrl = new URL(url, baseUrl);
+            const response = await fetch(finalUrl.href, opts);
 
-    return (await response.json()) as string;
-};
+            const json = await response.json();
+            return stdResponse(json.data, null);
+        } catch (error) {
+            return stdResponse(null, (error as Error).message);
+        }
+    };
+
+const jsonFetch = createFetch('http://localhost:8000');
+
+export const getChoices = async () => await jsonFetch<Choice[]>('/choices');
+export const getChoice = async () => await jsonFetch<Choice>('/choice');
+export const getMatchesHistory = async () => await jsonFetch('/matches');
+export const play = async (id: number) =>
+    await jsonFetch('/play', 'POST', { player: id });

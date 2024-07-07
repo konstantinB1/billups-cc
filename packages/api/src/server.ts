@@ -1,27 +1,43 @@
 import Koa from 'koa';
 import Router from '@koa/router';
-import { getAllChoices, getRandomChoice } from './logic';
+import cors from '@koa/cors';
+import bodyParser from 'koa-bodyparser';
+import registerRoutes from './endpoints';
+import { StdResponseType, stdResponse } from '../../common/src';
 
 const app = new Koa();
 const router = new Router();
 
-console.log(process.cwd());
-
-router.get('/choice', async (ctx) => {
-    ctx.body = await getRandomChoice();
-});
-
-router.get('/choices', (ctx) => {
-    ctx.body = getAllChoices();
-});
-
 router.use(async (ctx, next) => {
-    ctx.accepts('json');
-    await next();
+    ctx.type = 'json';
+    let body: StdResponseType<unknown>;
+
+    try {
+        await next();
+        ctx.status = ctx.status || 200;
+        console.log('Response body:', ctx.response.body);
+        body = stdResponse(ctx.response.body || null, 'Success', ctx.status);
+    } catch (error) {
+        const { statusCode, message } = error as any;
+
+        ctx.type = 'json';
+        ctx.status = statusCode || 500;
+        body = stdResponse(null, `Internal error: ${message}`, ctx.status);
+
+        ctx.app.emit('error', error, ctx);
+    } finally {
+        ctx.body = body;
+    }
 });
 
-router.post('/play', (ctx) => {});
+app.on('error', (err) => {
+    console.error('Server error', err);
+});
 
+registerRoutes(router);
+
+app.use(bodyParser());
+app.use(cors());
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(8000, () => {

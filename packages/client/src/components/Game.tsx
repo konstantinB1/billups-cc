@@ -23,8 +23,7 @@ export default function Game() {
     const computedChoices = useCirclePosition(
         rootCircleRef,
         choices as Choice[],
-        circleRefs,
-        current
+        circleRefs
     );
 
     const resetGame = useCallback(() => {
@@ -83,6 +82,9 @@ export default function Game() {
                         whileHover={{
                             transform: `translate(${choice.x}px, ${choice.y}px) scale(1.1)`
                         }}
+                        onFocus={() => setCurrent(choice)}
+                        onBlur={() => setCurrent(null)}
+                        disabled={isPending || !!playResponse}
                         onHoverStart={() => setCurrent(choice)}
                         onHoverEnd={() => setCurrent(null)}
                         transition={{
@@ -141,10 +143,7 @@ export default function Game() {
             <AnimatePresence>
                 {selected && isPending && !playResponse && (
                     <motion.div
-                        style={{
-                            position: 'absolute'
-                        }}
-                        className='text-center'
+                        className='text-center absolute'
                         key='loader'
                         initial={{
                             opacity: 0,
@@ -160,9 +159,8 @@ export default function Game() {
                         }}
                     >
                         <div
+                            className='relative text-center'
                             style={{
-                                textAlign: 'center',
-                                position: 'relative',
                                 width: 300
                             }}
                         >
@@ -171,6 +169,9 @@ export default function Game() {
                             </p>
                             <motion.div
                                 className='loader absolute-center'
+                                initial={{
+                                    transformOrigin: 'center'
+                                }}
                                 style={{
                                     position: 'absolute',
                                     backgroundColor:
@@ -179,7 +180,10 @@ export default function Game() {
                                     height: 300
                                 }}
                             />
-                            <p className='text-300 size-sm'>
+                            <p
+                                className='text-300 size-sm'
+                                style={{ lineHeight: 2 }}
+                            >
                                 Waiting for the computer&apos;s turn
                             </p>
                         </div>
@@ -200,14 +204,7 @@ export default function Game() {
                         transform: 'scale(1.4)'
                     }}
                 >
-                    <p>
-                        <Result
-                            retry={() => resetGame()}
-                            result={playResponse}
-                            selected={selected}
-                            computer={playResponse.computer}
-                        />
-                    </p>
+                    <Result retry={() => resetGame()} result={playResponse} />
                 </motion.div>
             )}
         </div>

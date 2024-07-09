@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getChoices, getMatchesHistory } from '../services';
+import { Match } from '../../../common';
 
 export default function useGameData() {
     const choices = useQuery({
@@ -14,7 +15,7 @@ export default function useGameData() {
         queryKey: ['matches'],
         queryFn: async () => {
             const { data } = await getMatchesHistory();
-            return data;
+            return data as Match[];
         }
     });
 

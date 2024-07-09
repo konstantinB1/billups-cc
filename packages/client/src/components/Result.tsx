@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import {
     ChoiceEndpointDTO,
     getChoiceById,
@@ -37,6 +38,7 @@ export const mapResult = (
 
 export default function Result({ result, retry }: ResultProps) {
     const { color, text } = mapResult(result.result);
+    const btnRef = useRef<HTMLButtonElement>(null);
 
     return (
         <div
@@ -84,6 +86,7 @@ export default function Result({ result, retry }: ResultProps) {
                 {text}
             </motion.h1>
             <motion.button
+                ref={btnRef}
                 className='play-again-btn'
                 initial={{
                     opacity: 0

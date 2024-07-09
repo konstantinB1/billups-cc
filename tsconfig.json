@@ -1,5 +1,5 @@
 {
-    "include": ["packages/**/*", "packages/migrations/knexfile.ts"],
+    "include": ["packages/**/*"],
     "compilerOptions": {
         "esModuleInterop": true,
         "noImplicitReturns": true,

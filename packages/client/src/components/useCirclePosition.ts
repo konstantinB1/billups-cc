@@ -25,8 +25,8 @@ export default function useCirclePosition(
             const angle = ((2 * Math.PI) / 5) * i;
             const x = centerX + centerY * Math.cos(angle);
             const y = centerX + centerY * Math.sin(angle);
-            const diameeter =
-                circleRefs?.[i]?.getBoundingClientRect()?.width / 2;
+            const ref = circleRefs?.[i];
+            const diameeter = ref?.getBoundingClientRect()?.width;
 
             let imgClass: string;
 
@@ -53,8 +53,8 @@ export default function useCirclePosition(
 
             return {
                 ...choice,
-                x: x - diameeter,
-                y: y - diameeter,
+                x: x - diameeter! / 2,
+                y: y - diameeter! / 2,
                 imgClass
             };
         });

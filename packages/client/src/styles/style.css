@@ -1,0 +1,123 @@
+@import './keyframes.css';
+@import './overrides.css';
+@import './background-animation.css';
+@import './utils.css';
+@import './circle.css';
+
+:root {
+    --bg-color: #2e4d70;
+    --primary-color: rgb(70, 129, 197);
+    --danger-color: rgb(206, 116, 125);
+    --success-color: rgb(93, 194, 103);
+    --warning-color: rgb(255, 162, 0);
+    --btn-border: rgb(255, 255, 255);
+}
+
+.color-primary {
+    color: var(--primary-color);
+}
+
+.color-danger {
+    color: var(--danger-color);
+}
+
+.color-success {
+    color: var(--success-color);
+}
+
+.color-white {
+    color: #fff;
+}
+
+.color-black {
+    color: #000 !important;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    transition: all 0.2s linear;
+    border: 1px solid var(--btn-border);
+    padding: 30px;
+    background-color: transparent;
+    border-radius: 10%;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.text-100 {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.text-200 {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.text-300 {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.size-xl {
+    font-size: 2rem;
+}
+
+.size-lg {
+    font-size: 1.5rem;
+}
+
+.size-md {
+    font-size: 1rem;
+}
+
+.size-sm {
+    font-size: 0.75rem;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid var(--primary-color);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 0.7s linear infinite;
+}
+
+.main-move-down {
+    animation: move-down 0.5s linear;
+}
+
+.main-move-final {
+    margin-top: 250px;
+}
+
+.play-again-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    border: 0;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}

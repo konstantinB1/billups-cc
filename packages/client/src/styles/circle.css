@@ -1,0 +1,99 @@
+.main-circle {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    position: relative;
+    transition: all 1s ease-in-out;
+}
+
+.main-circle-border {
+    border: 1px dashed var(--primary-color);
+    z-index: -100;
+}
+
+.nav-circle-button {
+    position: absolute;
+    border: 1px solid var(--primary-color);
+    border-radius: inherit;
+    background-color: var(--bg-color);
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    transition: all 0.12s ease-in-out;
+
+    &:hover {
+        background-color: var(--hover-color);
+        border: 5px solid var(--primary-color);
+
+        .text-nav {
+            position: absolute;
+            bottom: -36px;
+            background-color: var(--primary-color);
+            padding: 12px;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+    }
+}
+
+.revert-to-main-circle {
+    transition: all 1s ease-in-out;
+    transform: rotate(0deg);
+}
+
+.rotate-main-circle {
+    animation: rotation 10s linear infinite;
+}
+
+.img-disabled {
+    filter: grayscale(100%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.img-disabled-with-color {
+    filter: grayscale(0%);
+    pointer-events: none;
+}
+
+.loses-to {
+    border: 5px solid var(--danger-color) !important;
+}
+
+.wins-to {
+    border: 5px solid var(--success-color) !important;
+}
+
+.img-loser,
+.img-winner {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.img-loser {
+    border: 5px solid var(--danger-color);
+}
+
+.img-winner {
+    border: 5px solid var(--success-color);
+}
+
+.img-draw {
+    border: 5px solid var(--warning-color);
+}
+
+.img-base {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    position: absolute;
+}
+
+.point {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}

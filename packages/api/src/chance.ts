@@ -1,5 +1,4 @@
-import { ChoicesLiteral } from '../../common';
-import { getChoiceByLiteral } from './logic';
+import { ChoicesLiteral, getChoiceByLiteral } from '../../common';
 
 export default function chance(n: number) {
     if (isNaN(n)) {

@@ -1,0 +1,34 @@
+.background-animate {
+    &.bg-lose {
+        background: linear-gradient(
+            -90deg,
+            #522323,
+            #431c1c,
+            hsl(0, 76%, 13%),
+            #520e0e
+        );
+    }
+
+    &.bg-win {
+        background: linear-gradient(
+            -90deg,
+            #1f6e44,
+            #1f612f,
+            hsl(144, 56%, 25%),
+            #367350
+        );
+    }
+
+    &.bg-draw {
+        background: linear-gradient(
+            -90deg,
+            #ffbf0028,
+            #ffa60039,
+            hsl(56, 76%, 13%),
+            #1e1e1e
+        );
+    }
+
+    background-size: 400% 400%;
+    animation: gradient 6s ease-in-out infinite;
+}

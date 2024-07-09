@@ -1,23 +1,29 @@
-import { type Choice, stdResponse, StdResponseType } from '../../common';
-import { useEffect, useState } from 'react';
+import {
+    Endpoints,
+    stdResponse,
+    type Match,
+    type Choice,
+    type StdResponseType,
+    type ChoiceEndpointDTO
+} from '../../common';
 
 const createFetch =
     (baseUrl: string) =>
-    async <T>(
+    async <TResult, TData = unknown>(
         url: string,
         method: string = 'GET',
-        data?: T,
-    ): Promise<StdResponseType<T | null>> => {
+        data?: TData
+    ): Promise<StdResponseType<TResult | null>> => {
         try {
             const opts: RequestInit = {
                 method,
                 cache: 'no-cache',
                 headers: {
-                    'Content-Type': 'application/json',
-                },
+                    'Content-Type': 'application/json'
+                }
             };
 
-            if (method === 'POST' || method === 'PUT') {
+            if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
                 opts.body = JSON.stringify(data);
             }
 
@@ -31,10 +37,12 @@ const createFetch =
         }
     };
 
-const jsonFetch = createFetch('http://localhost:8000');
+const jsonFetch = createFetch(import.meta.env.VITE_LOCAL_SERVER!);
 
-export const getChoices = async () => await jsonFetch<Choice[]>('/choices');
-export const getChoice = async () => await jsonFetch<Choice>('/choice');
-export const getMatchesHistory = async () => await jsonFetch('/matches');
+export const getChoices = async () =>
+    await jsonFetch<Choice[]>(Endpoints.Choices);
+export const getChoice = async () => await jsonFetch<Choice>(Endpoints.Choice);
+export const getMatchesHistory = async () =>
+    await jsonFetch<Match[]>(Endpoints.Matches);
 export const play = async (id: number) =>
-    await jsonFetch('/play', 'POST', { player: id });
+    await jsonFetch<ChoiceEndpointDTO>(Endpoints.Play, 'POST', { player: id });

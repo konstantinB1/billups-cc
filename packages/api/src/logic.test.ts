@@ -1,5 +1,4 @@
-import { outcome } from './logic';
-import { ChoicesLiteral, Result } from '../../common/src';
+import { ChoicesLiteral, outcome, Result } from '../../common';
 
 describe('outcome', () => {
     test.each<[ChoicesLiteral, ChoicesLiteral, Result]>([
@@ -12,8 +11,8 @@ describe('outcome', () => {
         [ChoicesLiteral.Scissors, ChoicesLiteral.Rock, Result.Lose],
         [ChoicesLiteral.Scissors, ChoicesLiteral.Paper, Result.Win],
         [ChoicesLiteral.Scissors, ChoicesLiteral.Scissors, Result.Draw],
-        [ChoicesLiteral.Lizard, ChoicesLiteral.Rock, Result.Lose],
+        [ChoicesLiteral.Lizard, ChoicesLiteral.Rock, Result.Lose]
     ])('player: %s, computer: %s, result: %s', (player, computer, result) =>
-        expect(outcome(player, computer)).toBe(result),
+        expect(outcome(player, computer)).toBe(result)
     );
 });

@@ -3,18 +3,18 @@ export enum ChoicesLiteral {
     Paper = 'Paper',
     Scissors = 'Scissors',
     Lizard = 'Lizard',
-    Spock = 'Spock',
+    Spock = 'Spock'
 }
 
 export enum Result {
     Win = 'win',
-    Lose = 'win',
-    Draw = 'draw',
+    Lose = 'lose',
+    Draw = 'draw'
 }
 
 export enum PlayerType {
     Player = 'player',
-    Computer = 'computer',
+    Computer = 'computer'
 }
 
 export const randomNumberEndpoint = 'https://codechallenge.boohma.com';

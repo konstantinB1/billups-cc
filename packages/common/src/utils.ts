@@ -7,11 +7,11 @@ export type StdResponseType<T> = {
 export function stdResponse<T>(
     data: T,
     message: string | null,
-    status: number = 200,
+    status: number = 200
 ): StdResponseType<T> {
     return {
         data: data,
         message,
-        status,
+        status
     };
 }

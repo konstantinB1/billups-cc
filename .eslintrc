@@ -1,0 +1,25 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "ignorePatterns": ["node_modules", "build", "dist"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:prettier/recommended",
+        "plugin:react/jsx-runtime"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+
+    "parserOptions": {
+        "ecmaVersion": 2024,
+        "project": "./tsconfig.json"
+    },
+    "plugins": ["@typescript-eslint", "react", "react-hooks"]
+}

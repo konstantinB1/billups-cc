@@ -4,9 +4,9 @@ import { Result } from '../../common';
 export async function up(knex: Knex): Promise<void> {
     await knex.schema.createTable('matches', (table) => {
         table.increments('id').primary();
-        table.enum('result', Object.values(Result));
-        table.string('computer_choice');
-        table.string('player_choice');
+        table.enum('result', [Result.Win, Result.Lose, Result.Draw]);
+        table.integer('computer_choice');
+        table.integer('player_choice');
     });
 }
 

@@ -1,22 +1,13 @@
 import type Router from '@koa/router';
-import {
-    getAllChoices,
-    getChoiceById,
-    getRandomChoice,
-    outcome,
-} from './logic';
-
-enum Endpoints {
-    Choice = '/choice',
-    Choices = '/choices',
-    Play = '/play',
-    Matches = '/matches',
-}
+import { getRandomChoice } from './logic';
 
 import matchesModel from '../../models/matches';
+import { ChoiceEndpointDTO, Endpoints } from '../../common';
+import { getAllChoices, getChoiceById, outcome } from '../../common';
 
 export default function registerRoutes(router: Router) {
     const model = matchesModel();
+
     router.get(Endpoints.Choice, async (ctx) => {
         ctx.body = await getRandomChoice();
     });
@@ -35,7 +26,7 @@ export default function registerRoutes(router: Router) {
         ctx.assert(
             playerChoiceId !== undefined && typeof playerChoiceId === 'number',
             400,
-            `Invalid player choice: ${playerChoiceId}`,
+            `Invalid player choice: ${playerChoiceId}`
         );
 
         const computer = await getRandomChoice();
@@ -44,23 +35,29 @@ export default function registerRoutes(router: Router) {
         ctx.assert(
             playerChoice !== undefined,
             400,
-            `Unknown choice: ${playerChoiceId}`,
+            `Unknown choice: ${playerChoiceId}`
         );
 
-        const result = outcome(playerChoice?.name!, computer.name);
+        const result = outcome(playerChoice!.name, computer.name);
 
         model.saveMatch({
             player_choice: playerChoiceId,
             computer_choice: computer.id,
-            result,
+            result
         });
+
+        console.log('result', result);
 
         ctx.assert(result, 500, 'Invalid result');
 
-        ctx.body = { player: playerChoiceId, computer: computer.id, result };
+        ctx.body = {
+            player: playerChoiceId,
+            computer: computer.id,
+            result
+        } as ChoiceEndpointDTO;
     });
 
     router.get(Endpoints.Matches, async (ctx) => {
-        ctx.body = model.getLastResults();
+        ctx.body = await model.getLastResults();
     });
 }

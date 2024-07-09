@@ -11,7 +11,7 @@ export const getRandomNumber = async (): Promise<{
         // fallback
         console.error(
             'Unable to fetch random number',
-            (e as Error)?.message || e,
+            (e as Error)?.message || e
         );
         return { random_number: Math.floor(Math.random() * 100) };
     }

@@ -1,4 +1,5 @@
 {
+    "extends": "../../tsconfig.json",
     "include": ["src/**/*", "vite.config.ts"],
     "compilerOptions": {
         "target": "esnext",
@@ -13,6 +14,8 @@
         "isolatedModules": true,
         "resolveJsonModule": true,
         "baseUrl": ".",
-        "types": ["vite/client"]
+        "paths": {
+            "@assets/*": ["src/assets/*"]
+        }
     }
 }

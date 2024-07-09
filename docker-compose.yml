@@ -54,6 +54,8 @@ services:
                   target: /app/packages/client
                   ignore:
                       - node_modules
+        environment:
+            VITE_LOCAL_SERVER: http://localhost:8000
         depends_on:
             - db
             - migrations

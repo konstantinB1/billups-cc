@@ -2,7 +2,7 @@
 
 ## Overview
 
-Project utilizes multiple packages related to the project code challenge. Some packages include docker files since they are running individual processes that are tucked in in their respecive docker containers. Docker compose is used to orchestrate the containers and the network between them. Packages include
+Project utilizes multiple packages (monorepo kinda) related to the project code challenge. Some packages include docker files since they are running individual processes that are tucked in in their respecive docker containers. Docker compose is used to orchestrate the containers and the network between them. Packages include
 
 -   api - Koa.js server that serves the API
 -   client - React.js client that serves the front end via Vite dev server
@@ -65,3 +65,4 @@ docker compose watch
 -   Enable github workflows for CI testing, and linting
 -   Refactor the client side code, it's a bit messy.
 -   Robust docker compose with guarantees that the migrations are done before the api server starts.
+-   Better monorepo support with either something like Turbo or nx

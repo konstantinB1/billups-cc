@@ -25,6 +25,10 @@ It will expose 2 servers:
 -   API server: http://localhost:8000
 -   Client server: http://localhost:300
 
+## Potential issues
+
+The biggest issue that can arose is race conditions between dependencies in docker compose file. Somethimes the api server will start before migrations are done, and migrations might start before the postgress port socket is listening. I addressed some of those issues with `wait-for`, and last 10 times i ran the project it worked fine. But if this happens, just run the command few more times, and it should work fine.
+
 ## Third party packages used
 
 -   Koa.js for the API server, was thinking to use vanilla node http module but decided to use Koa.js for the sake of time, and ease of use.
@@ -60,3 +64,4 @@ docker compose watch
 -   Add more tests, especially for the client side.
 -   Enable github workflows for CI testing, and linting
 -   Refactor the client side code, it's a bit messy.
+-   Robust docker compose with guarantees that the migrations are done before the api server starts.

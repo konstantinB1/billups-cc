@@ -17,12 +17,19 @@ function createChoicesEndpoint(router: Router) {
     });
 }
 
-export default function registerRoutes(router: Router) {
-    const model = matchesModel();
+function createMatchesEndpoint(
+    router: Router,
+    model: ReturnType<typeof matchesModel>
+) {
+    router.get(Endpoints.Matches, async (ctx) => {
+        ctx.body = await model.getLastResults();
+    });
+}
 
-    createChoiceEndpoint(router);
-    createChoicesEndpoint(router);
-
+function createPlayEndpoint(
+    router: Router,
+    model: ReturnType<typeof matchesModel>
+) {
     type RequestBody = {
         player: number;
     };
@@ -63,8 +70,13 @@ export default function registerRoutes(router: Router) {
             result
         } as ChoiceEndpointDTO;
     });
+}
 
-    router.get(Endpoints.Matches, async (ctx) => {
-        ctx.body = await model.getLastResults();
-    });
+export default function registerRoutes(router: Router) {
+    const model = matchesModel();
+
+    createChoiceEndpoint(router);
+    createChoicesEndpoint(router);
+    createPlayEndpoint(router, model);
+    createMatchesEndpoint(router, model);
 }

@@ -54,3 +54,9 @@ or just
 
 docker compose watch
 ```
+
+## Things left to do
+
+-   Add more tests, especially for the client side.
+-   Enable github workflows for CI testing, and linting
+-   Refactor the client side code, it's a bit messy.

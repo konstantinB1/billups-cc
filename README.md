@@ -23,7 +23,7 @@ docker-compose up --build
 It will expose 2 servers:
 
 -   API server: http://localhost:8000
--   Client server: http://localhost:300
+-   Client server: http://localhost:3000
 
 ## Potential issues
 
@@ -35,7 +35,7 @@ The biggest issue that can arose is race conditions between dependencies in dock
 -   Postgress for the database, i used the official docker image for the database.
 -   Knex.js for the database migrations, so a table for the matches would be auto created when the docker compose is run.
 -   React 18 for the client UI
--   Plain css for styling, no frameworks involved. I wanted to keep it simple and clean, and also latest css features is something i really like and wanted to try it out in contrast to modern css in js frameworks.
+-   Plain css for styling, no frameworks involved. I wanted to keep it simple and clean, and also latest css features is something i really like and wanted to try it out in contrast to modern css in js frameworks. Inspired by Tailwind
 -   Vite for the client dev server, it's fast and easy to use.
 -   Docker and Docker Compose for running the project in a containerized environment.
 -   Jest for some basic tests, i didn't have enough time to be really thorough with the tests.

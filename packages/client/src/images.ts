@@ -19,9 +19,9 @@ async function getPics(): Promise<GameImage[]> {
 
             return {
                 path: file,
-                name: name as string,
+                name: name as string
             };
-        }),
+        })
     );
 
     return futures;

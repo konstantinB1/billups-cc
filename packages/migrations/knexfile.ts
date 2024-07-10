@@ -7,17 +7,17 @@ const config: { [key: string]: Knex.Config } = {
             host: process.env.POSTGRES_HOST,
             database: process.env.POSTGRES_DB,
             user: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
+            password: process.env.POSTGRES_PASSWORD
         },
         pool: {
             min: 2,
-            max: 10,
+            max: 10
         },
         migrations: {
             directory: './migrations',
-            tableName: 'knex_migrations',
-        },
-    },
+            tableName: 'knex_migrations'
+        }
+    }
 };
 
 export default config;

@@ -66,3 +66,4 @@ docker compose watch
 -   Refactor the client side code, it's a bit messy.
 -   Robust docker compose with guarantees that the migrations are done before the api server starts.
 -   Better monorepo support with either something like Turbo or nx
+-   Some polish on the UI, and animations

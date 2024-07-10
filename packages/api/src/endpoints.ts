@@ -5,16 +5,23 @@ import matchesModel from '../../models/matches';
 import { ChoiceEndpointDTO, Endpoints } from '../../common';
 import { getAllChoices, getChoiceById, outcome } from '../../common';
 
-export default function registerRoutes(router: Router) {
-    const model = matchesModel();
-
+function createChoiceEndpoint(router: Router) {
     router.get(Endpoints.Choice, async (ctx) => {
         ctx.body = await getRandomChoice();
     });
+}
 
+function createChoicesEndpoint(router: Router) {
     router.get(Endpoints.Choices, (ctx) => {
         ctx.body = getAllChoices();
     });
+}
+
+export default function registerRoutes(router: Router) {
+    const model = matchesModel();
+
+    createChoiceEndpoint(router);
+    createChoicesEndpoint(router);
 
     type RequestBody = {
         player: number;

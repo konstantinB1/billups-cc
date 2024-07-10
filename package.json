@@ -10,7 +10,8 @@
         "migrations:migrate": "npm run migrate -w packages/migrations",
         "migrations:rollback": "npm run rollback -w packages/migrations",
         "dev": "npm run migrations:migrate && npm run api:dev && npm run client:dev",
-        "lint": "eslint . --ext .ts,.tsx"
+        "lint": "eslint . --ext .ts,.tsx",
+        "test": "npx jest"
     },
     "author": "Konstantin Bulatovic",
     "license": "ISC",
@@ -35,7 +36,8 @@
         "ts-jest": "^29.1.5",
         "tsx": "^4.16.2",
         "typescript": "^5.5.3",
-        "vite": "^5.3.3"
+        "vite": "^5.3.3",
+        "wait-for": "^2.1.1"
     },
     "dependencies": {
         "@babel/eslint-parser": "^7.24.7",

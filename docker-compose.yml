@@ -15,6 +15,8 @@ services:
             dockerfile: packages/migrations/Dockerfile
         depends_on:
             - db
+        command:
+            ['./wait-for', 'db:5432', '--', 'npm', 'run', 'migrations:migrate']
         environment:
             POSTGRES_HOST: db
             POSTGRES_USER: kbulatovic

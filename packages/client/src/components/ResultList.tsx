@@ -84,6 +84,16 @@ export default function ResultList({
                     zIndex: 105
                 }}
             >
+                {matches?.length === 0 && (
+                    <p
+                        style={{
+                            width: '100vw',
+                            height: '100vh'
+                        }}
+                    >
+                        <p className='flex-center text-100'>No matches found</p>
+                    </p>
+                )}
                 <div className='flex-center'>
                     <button
                         onClick={() => setShowResults(false)}

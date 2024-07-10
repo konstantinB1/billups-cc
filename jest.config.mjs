@@ -1,7 +1,7 @@
 /**
  * @type {import('@jest/types').Config.InitialOptions}
  */
-module.exports = {
+export default {
     preset: 'ts-jest',
-    modulePaths: ['<rootDir>/packages'],
+    modulePaths: ['<rootDir>/packages']
 };

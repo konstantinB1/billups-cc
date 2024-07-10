@@ -1,4 +1,4 @@
-import { Choice, ChoicesLiteral } from '../../../common';
+import { Choice } from '../../../common';
 import { RefObject, useEffect, useState } from 'react';
 
 export type ChoicesWithPositions = Choice & {
@@ -6,6 +6,23 @@ export type ChoicesWithPositions = Choice & {
     y: number;
     imgClass: string;
     relations: [];
+};
+
+const paths = import.meta.glob('../assets/*.{jpeg,jpg,avif,webp}');
+
+const getImagePath = (choice: Choice): string => {
+    const image = Object.keys(paths).find((path) => {
+        const last = path.split('/')[2];
+        const [name] = last.split('.');
+
+        return name === choice.name.toLowerCase();
+    });
+
+    if (!image) {
+        throw new Error(`Image not found for ${choice.name}`);
+    }
+
+    return image;
 };
 
 export default function useCirclePosition(
@@ -21,41 +38,24 @@ export default function useCirclePosition(
         const bounds = rootCircleRef.current?.getBoundingClientRect();
         const centerX = bounds!.width / 2;
         const centerY = bounds!.height / 2;
+
         const choices2 = choices?.map((choice, i) => {
-            const angle = ((2 * Math.PI) / 5) * i;
+            const ref = circleRefs?.[i];
+
+            const angle = ((2 * Math.PI) / choices.length) * i;
             const x = centerX + centerY * Math.cos(angle);
             const y = centerX + centerY * Math.sin(angle);
-            const ref = circleRefs?.[i];
             const diameeter = ref?.getBoundingClientRect()?.width;
+            const dx = x - diameeter! / 2;
+            const dy = y - diameeter! / 2;
 
-            let imgClass: string;
-
-            switch (choice.name) {
-                case ChoicesLiteral.Rock:
-                    imgClass = '../../assets/rock.jpeg';
-                    break;
-                case ChoicesLiteral.Paper:
-                    imgClass = '../../assets/paper.jpg';
-                    break;
-                case ChoicesLiteral.Scissors:
-                    imgClass = '../../assets/scissors.avif';
-                    break;
-                case ChoicesLiteral.Lizard:
-                    imgClass = '../../assets/lizard.jpeg';
-                    break;
-                case ChoicesLiteral.Spock:
-                    imgClass = '../../assets/spock.webp';
-                    break;
-                default:
-                    imgClass = '';
-                    break;
-            }
+            const imagePath = getImagePath(choice);
 
             return {
                 ...choice,
-                x: x - diameeter! / 2,
-                y: y - diameeter! / 2,
-                imgClass
+                x: dx,
+                y: dy,
+                imgClass: imagePath
             };
         });
 

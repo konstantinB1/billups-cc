@@ -11,6 +11,7 @@ export default function usePlayMutation(done: boolean) {
     const playMutation = useMutation({
         mutationKey: ['play'],
         mutationFn: (id: number) =>
+            // Simulate a delay to enjoy animation :)
             new Promise((resolve) => setTimeout(resolve, 1500)).then(() =>
                 play(id)
             ),

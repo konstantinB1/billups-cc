@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useGameData from './useGameData';
 import { type Choice } from '../../../common';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -28,10 +28,6 @@ export default function Game() {
         circleRefs
     );
 
-    if (isSuccess) {
-        refetchMatches();
-    }
-
     const resetGame = useCallback(() => {
         setCurrent(null);
         setSelected(null);
@@ -41,6 +37,12 @@ export default function Game() {
             setMatchOver(false);
         });
     }, []);
+
+    useEffect(() => {
+        if (isSuccess) {
+            refetchMatches();
+        }
+    }, [isSuccess, refetchMatches]);
 
     const startGame = useCallback(
         (choice: Choice) => {
@@ -220,7 +222,6 @@ export default function Game() {
                                     transformOrigin: 'center'
                                 }}
                                 style={{
-                                    position: 'absolute',
                                     backgroundColor:
                                         'rgba(255, 255, 255, 0.05)',
                                     width: 300,

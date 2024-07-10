@@ -14,6 +14,7 @@ export default function useGameData() {
     const matches = useQuery({
         queryKey: ['matches'],
         queryFn: async () => {
+            console.log()
             const { data } = await getMatchesHistory();
             return data as Match[];
         }

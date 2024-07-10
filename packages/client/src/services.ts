@@ -17,7 +17,6 @@ const createFetch =
         try {
             const opts: RequestInit = {
                 method,
-                cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json'
                 }

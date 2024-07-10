@@ -7,11 +7,12 @@ import Result from './Result';
 import useCirclePosition, { ChoicesWithPositions } from './useCirclePosition';
 import clsx from 'clsx';
 import ResultList from './ResultList';
+import useShowResults from './useShowResults';
 
 export default function Game() {
     const [matchOver, setMatchOver] = useState(false);
-    const { choices, matches } = useGameData();
-    const [{ mutate: play, isPending }, playResponse] =
+    const { choices, matches, refetchMatches } = useGameData();
+    const [{ mutate: play, isPending, isSuccess }, playResponse] =
         usePlayMutation(matchOver);
     const [current, setCurrent] = useState<ChoicesWithPositions | null>(null);
     const [selected, setSelected] = useState<Choice | null>(null);
@@ -19,12 +20,17 @@ export default function Game() {
     const [circleRefs, setCircleRefs] = useState<(HTMLButtonElement | null)[]>(
         []
     );
+    const [showResults, setShowResults] = useShowResults();
 
     const computedChoices = useCirclePosition(
         rootCircleRef,
         choices as Choice[],
         circleRefs
     );
+
+    if (isSuccess) {
+        refetchMatches();
+    }
 
     const resetGame = useCallback(() => {
         setCurrent(null);
@@ -37,10 +43,9 @@ export default function Game() {
     }, []);
 
     const startGame = useCallback(
-        async (choice: Choice) => {
+        (choice: Choice) => {
             setCurrent(null);
             setSelected(choice);
-
             play(choice.id);
         },
         [play]
@@ -48,7 +53,27 @@ export default function Game() {
 
     return (
         <div className='flex-center' style={{ height: '100vh' }}>
-            <ResultList matches={matches} />
+            <AnimatePresence>
+                {showResults && (
+                    <motion.div
+                        initial={{
+                            zIndex: 100,
+                            opacity: 0
+                        }}
+                        animate={{
+                            opacity: 1
+                        }}
+                        exit={{
+                            opacity: 0
+                        }}
+                    >
+                        <ResultList
+                            setShowResults={setShowResults}
+                            matches={matches}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <motion.div
                 ref={rootCircleRef}
                 initial={{ rotate: 0 }}
@@ -62,12 +87,12 @@ export default function Game() {
                 }}
                 transition={{
                     repeat: selected && isPending ? Infinity : 0,
-                    duration: 0.1,
+                    duration: 0.01,
                     ease: 'easeInOut'
                 }}
                 className={clsx({
                     'main-circle': true,
-                    'main-circle-border': selected && isPending
+                    'main-circle-border': true
                 })}
             >
                 {computedChoices?.map((choice) => (
@@ -94,6 +119,7 @@ export default function Game() {
                         key={choice.id}
                         className={clsx({
                             'nav-circle-button': true,
+                            circle: true,
                             'flex-center': true,
                             'loses-to':
                                 current &&
@@ -124,23 +150,44 @@ export default function Game() {
                             })}
                         />
                         {current && current.name === choice.name && (
-                            <span className='text-nav'>{choice.name}</span>
+                            <motion.span
+                                style={{
+                                    minWidth: 100,
+                                    borderRadius: 8
+                                }}
+                                initial={{
+                                    opacity: 0,
+                                    transform: 'translateY(-10%)'
+                                }}
+                                animate={{
+                                    opacity: 1,
+                                    transform: 'translateY(10%)'
+                                }}
+                                transition={{
+                                    duration: 0.3,
+                                    ease: 'circInOut'
+                                }}
+                                className='text-nav'
+                            >
+                                {choice.name}
+                            </motion.span>
                         )}
                     </motion.button>
                 ))}
-                <div
-                    className='flex-center'
-                    style={{
-                        height: '100%',
-                        width: '100%'
-                    }}
-                >
-                    {current && (
-                        <p className='text-100 size-xl'>Play {current?.name}</p>
-                    )}
-                </div>
             </motion.div>
             <AnimatePresence>
+                {!isPending && !playResponse && (
+                    <motion.div
+                        onClick={() => setShowResults(true)}
+                        className='absolute-center circle match-history flex-center'
+                        style={{
+                            width: 100,
+                            height: 100
+                        }}
+                    >
+                        <p className='text-500 size-sm'>History</p>
+                    </motion.div>
+                )}
                 {selected && isPending && !playResponse && (
                     <motion.div
                         className='text-center absolute'
@@ -192,9 +239,7 @@ export default function Game() {
             </AnimatePresence>
             {playResponse && !isPending && (
                 <motion.div
-                    style={{
-                        position: 'absolute'
-                    }}
+                    className='absolute'
                     initial={{
                         opacity: 0,
                         transform: 'scale(0)'

@@ -37,8 +37,15 @@ const choices = [
 export const getChoiceByLiteral = (literal: ChoicesLiteral): Choice =>
     choices.find((choice) => choice.name === literal)!;
 
-export const getChoiceById = (id: number): Choice | undefined =>
-    choices.find((choice) => choice.id === id)!;
+export const getChoiceById = (id: number): Choice => {
+    const result = choices.find((choice) => choice.id === id);
+
+    if (!result) {
+        throw new Error('Invalid choice');
+    }
+
+    return result;
+};
 
 export const outcome = (
     userChoice: ChoicesLiteral,

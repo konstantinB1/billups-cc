@@ -30,3 +30,27 @@
 .relative {
     position: relative;
 }
+
+.object-cover {
+    object-fit: cover;
+}
+
+.object-contain {
+    object-fit: contain;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}

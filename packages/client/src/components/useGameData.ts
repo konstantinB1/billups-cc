@@ -21,6 +21,7 @@ export default function useGameData() {
 
     return {
         choices: choices.data,
-        matches: matches.data
+        matches: matches.data,
+        refetchMatches: matches.refetch
     };
 }
